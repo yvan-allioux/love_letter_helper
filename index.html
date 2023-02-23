@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Love Letter Helper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<div id="app">
+
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">{{ nbJoueurs }} Love Letter Helper</a><!-- retour au setup de la partie -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav" v-if="start === 1">
+                    <button class="btn btn-primary m-1" @click="goToPageNav(1)">joueur 1</a>
+                        <button class="btn btn-primary m-1" @click="goToPageNav(2)" v-if="nbJoueurs >= '2'">joueur 2
+                        </button>
+                        <button class="btn btn-primary m-1" @click="goToPageNav(3)" v-if="nbJoueurs >= '3'">joueur
+                            3</button>
+                        <button class="btn btn-primary m-1" @click="goToPageNav(4)" v-if="nbJoueurs >= '4'">joueur
+                            4</button>
+                        <button class="btn btn-primary m-1" @click="goToPageNav(5)" v-if="nbJoueurs >= '5'">joueur
+                            5</button>
+                        <button class="btn btn-primary m-1" @click="goToPageNav(6)" v-if="nbJoueurs >= '6'">joueur
+                            6</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <body>
+
+        <div v-if="statuDeLaPage === 'home'" class="container">
+            home
+            <!-- bouton qui va appler la methode changeNbJoueurs -->
+            <button class="btn btn-primary m-1" @click="changeNbJoueurs(2)">2</button>
+            <button class="btn btn-primary m-1" @click="changeNbJoueurs(3)">3</button>
+            <button class="btn btn-primary m-1" @click="changeNbJoueurs(4)">4</button>
+            <button class="btn btn-primary m-1" @click="changeNbJoueurs(5)">5</button>
+            <button class="btn btn-primary m-1" @click="changeNbJoueurs(6)">6</button>
+
+        </div>
+
+        <div class="container" v-if="statuDeLaPage != 'home'">
+            <h5 class="m-4">Joueur {{ activePlayer }} <button class="btn btn-primary m-1" @click="goToPageNavNEXT(activePlayer)">next player</button></h5>
+
+            <p>action</p>
+            <select v-model="selected">
+                <option v-for="option in options" v-bind:value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+
+            <p>LISTE DES CARTE EN JEUX</p>
+            <div class="row">
+                <div class="col-3 m-1 greyBackground" v-for="cardDataPlay in cardDataPlay">
+                    <button class="btn btn-primary m-1" @click="jouerJouCarte(cardDataPlay)">{{ getName(cardDataPlay)
+                        }}</button>
+                </div>
+            </div>
+
+            <p>LISTE DES CARTE JOUE PAR LE JOUEUR</p>
+            <div class="row">
+                <div class="col-3 m-1 greyBackground" v-for="activeplayerCards in activeplayerCards">
+                    <p class="btn btn-primary m-1" @click="jouerJouCarte(cardDataPlay)">{{ getName(activeplayerCards) }}
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </body>
+
+</div>
+
+<script src="script.js"></script>
+
+
+<footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</footer>
+
+</html>

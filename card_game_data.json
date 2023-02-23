@@ -1,0 +1,65 @@
+{
+    "card": {
+        "espione": {
+            "title": "Espione",
+            "description": "emp",
+            "niveau": 0,
+            "nombre": 2
+        },
+        "garde": {
+            "title": "Garde",
+            "description": "Choisissez un joueur et essayez de deviner la carte qu'il a en main (excepté le Guard), si vous tombez juste, le joueur est éliminé de la manche.",
+            "niveau": 1,
+            "nombre": 6
+        },
+        "pretre": {
+            "title": "Pretre",
+            "description": "Regardez la main d'un autre joueur.",
+            "niveau": 2,
+            "nombre": 2
+        },
+        "baron": {
+            "title": "Baron",
+            "description": "Comparez votre carte avec celle d'un autre joueur, celui qui a la carte avec la plus faible valeur est éliminé de la manche.",
+            "niveau": 3,
+            "nombre": 2
+        },
+        "servante": {
+            "title": "Servante",
+            "description": "Jusqu'au prochain tour, vous êtes protégé des effets des cartes des autres joueurs.",
+            "niveau": 4,
+            "nombre": 2
+        },
+        "prince": {
+            "title": "Prince",
+            "description": " choisissez un joueur (y compris vous), celui-ci défausse la carte qu'il a en main pour en piocher une nouvelle.",
+            "niveau": 5,
+            "nombre": 2
+        },
+        "chancelier": {
+            "title": "Chancelier",
+            "description": "emp",
+            "niveau": 6,
+            "nombre": 2
+        },
+        "roi": {
+            "title": "Roi",
+            "description": "échangez votre main avec un autre joueur de votre choix.",
+            "niveau": 7,
+            "nombre": 1
+        },
+        "comtesse": {
+            "title": "Comtesse",
+            "description": "Si vous avez cette carte en main en même temps que le Roi ou le Prince, alors vous devez défausser la carte de la Countess",
+            "niveau": 8,
+            "nombre": 1
+        },
+        "princesse": {
+            "title": "Princesse",
+            "description": "si vous défaussez cette carte, vous êtes éliminé de la manche.",
+            "niveau": 9,
+            "nombre": 1
+        }
+        
+    }
+}
