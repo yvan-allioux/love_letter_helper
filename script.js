@@ -86,11 +86,47 @@ var app = new Vue({
             { text: 'a baron quelqun', value: 'C' }
         ],
         playerArray: [],
-        activeplayerCards: []
+        activeplayerCards: [],
+        moi: 0,
     },
     methods: {
         changePage: function (page) {
             this.statuDeLaPage = page;
+        },
+        getColor(cardDataPlay) {
+            console.log('cardDataPlay: ', cardDataPlay);
+            switch (cardDataPlay) {
+                case 0:
+                    return 'fuchsia';
+                case 1:
+                    return 'aqua';
+                case 2:
+                    return 'lightblue';
+                case 3:
+                    return 'green';
+                case 4:
+                    return 'yellow';
+                case 5:
+                    return 'orange';
+                case 6:
+                    return 'purple';
+                case 7:
+                    return 'pink';
+                case 8:
+                    return 'brown';
+                case 9:
+                    return 'red';
+                default:
+                    console.log('error');
+                    break;
+                
+            }
+
+        },
+        cestMoi: function () {
+            this.moi = this.activePlayer;
+            console.log('this.moi: ', this.moi);
+
         },
         setupCard: function (bigOrSmallDeck) {
 
@@ -123,7 +159,7 @@ var app = new Vue({
                 this.setupCard(2)
             }
             this.nbJoueurs = nb;
-            for(let i = 1; i <= this.nbJoueurs; i++){
+            for (let i = 1; i <= this.nbJoueurs; i++) {
                 this.playerArray.push(new player(i, []));
             }
             console.log(this.playerArray);
@@ -199,7 +235,7 @@ var app = new Vue({
 
             //on ajoute la carte au tableau du joueur
             this.playerArray[this.activePlayer - 1].card.push(carte);
-            
+
         },
         getName: function (niveau) {
             for (const key in this.cardDataBase) {

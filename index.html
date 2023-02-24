@@ -53,28 +53,29 @@
         </div>
 
         <div class="container" v-if="statuDeLaPage != 'home'">
-            <h5 class="m-4">Joueur {{ activePlayer }} <button class="btn btn-primary m-1" @click="goToPageNavNEXT(activePlayer)">next player</button></h5>
-
-            <p>action</p>
+            <h5 class="m-4">Joueur {{ activePlayer }} <span v-if="moi === activePlayer">(vous)</span><button class="btn btn-primary m-1" @click="goToPageNavNEXT(activePlayer)">next player</button></h5>
+            <button v-if="moi === 0" @click="cestMoi()">c'est vous ?</button>
+            
+            <br>
+            <!-- <p>action</p>
             <select v-model="selected">
                 <option v-for="option in options" v-bind:value="option.value">
                     {{ option.text }}
                 </option>
             </select>
-            <span>Selected: {{ selected }}</span>
+            <span>Selected: {{ selected }}</span> -->
 
             <p>LISTE DES CARTE EN JEUX</p>
             <div class="row">
                 <div class="col-3 m-1 greyBackground" v-for="cardDataPlay in cardDataPlay">
-                    <button class="btn btn-primary m-1" @click="jouerJouCarte(cardDataPlay)">{{ getName(cardDataPlay)
-                        }}</button>
+                    <button class="btn m-1" v-bind:style="{ backgroundColor: getColor(cardDataPlay) }" @click="jouerJouCarte(cardDataPlay)">{{ getName(cardDataPlay) }}</button>
                 </div>
             </div>
 
             <p>LISTE DES CARTE JOUE PAR LE JOUEUR</p>
             <div class="row">
                 <div class="col-3 m-1 greyBackground" v-for="activeplayerCards in activeplayerCards">
-                    <p class="btn btn-primary m-1" @click="jouerJouCarte(cardDataPlay)">{{ getName(activeplayerCards) }}
+                    <p class="m-1">{{ getName(activeplayerCards) }}
                     </p>
                 </div>
             </div>
