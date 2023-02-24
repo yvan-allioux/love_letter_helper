@@ -1,2 +1,2 @@
 # love_letter_helper
-link : 
+link : https://yvan-allioux.github.io/love_letter_helper/
