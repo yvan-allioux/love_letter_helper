@@ -16,7 +16,7 @@
 
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">{{ nbJoueurs }} Love Letter Helper</a><!-- retour au setup de la partie -->
+            <a class="navbar-brand" href="#">Love Letter Helper</a><!-- retour au setup de la partie -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
 
         <div class="container text-center" v-if="statuDeLaPage != 'home'">
             <h5 class="m-4">Joueur {{ activePlayer }} <span v-if="moi === activePlayer">(vous)</span><button class="btn btn-primary m-1" @click="goToPageNavNEXT(activePlayer)">next player</button></h5>
-            <button v-if="moi === 0" @click="cestMoi()">c'est vous ?</button>
+            <button v-if="moi === 0" @click="cestMoi()">c'est vous ?</button><p v-if="moi === 0">si oui sélectionner la carte que vous avez + celle que vous venez de piocher</p>
             
             <br>
             <!-- <p>action</p>
@@ -66,6 +66,7 @@
             <span>Selected: {{ selected }}</span> -->
 
             <p>LISTE DES CARTE EN JEUX</p>
+            <p>Cliquer sur les cartes que le joueur a jouées</p>
             <div class="row">
                 <div class="col m-1 greyBackground" v-for="cardDataPlay in cardDataPlay">
                     <button class="btn m-1" v-bind:style="{ backgroundColor: getColor(cardDataPlay) }" @click="jouerJouCarte(cardDataPlay)">{{ getName(cardDataPlay) }}</button>
