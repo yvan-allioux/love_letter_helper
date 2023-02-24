@@ -55,7 +55,7 @@
         <div class="container text-center" v-if="statuDeLaPage != 'home'">
             <h5 class="m-4">Joueur {{ activePlayer }} <span v-if="moi === activePlayer">(vous)</span><button class="btn btn-primary m-1" @click="goToPageNavNEXT(activePlayer)">next player</button></h5>
             <button v-if="moi === 0" @click="cestMoi()">c'est vous ?</button><p v-if="moi === 0">si oui sélectionner la carte que vous avez + celle que vous venez de piocher</p>
-            
+            <span v-if="moi === activePlayer">sélectionner la carte que vous venez de piocher</span>
             <br>
             <!-- <p>action</p>
             <select v-model="selected">
