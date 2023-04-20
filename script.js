@@ -77,7 +77,10 @@ var app = new Vue({
         nbJoueurs: 6,
         cardDataBase: cardData.card,
         cardDataPlay: [],
+        playerArrayGarde: [],
+        playerArrayBaron: [],
         activePlayer: 1,
+        previousActivePlayer: 1,
         start: 0,
         selected: 'A',
         options: [
@@ -87,14 +90,24 @@ var app = new Vue({
         ],
         playerArray: [],
         activeplayerCards: [],
+        activeplayerBaron: [],
+        activeplayerGarde: [],
         moi: 0,
+        garde: 0,
+        baron: 0
     },
     methods: {
         changePage: function (page) {
             this.statuDeLaPage = page;
         },
+        baronSet: function (baronParam) {
+            this.baron = baronParam; 
+        },
+        gardeSet: function (gardeParam) {
+            this.garde = gardeParam; 
+        },
         getColor(cardDataPlay) {
-            console.log('cardDataPlay: ', cardDataPlay);
+            
             switch (cardDataPlay) {
                 case 0:
                     return 'fuchsia';
@@ -117,7 +130,7 @@ var app = new Vue({
                 case 9:
                     return 'red';
                 default:
-                    console.log('error');
+                    
                     break;
                 
             }
@@ -125,7 +138,7 @@ var app = new Vue({
         },
         cestMoi: function () {
             this.moi = this.activePlayer;
-            console.log('this.moi: ', this.moi);
+            
 
         },
         setupCard: function (bigOrSmallDeck) {
@@ -162,11 +175,12 @@ var app = new Vue({
             for (let i = 1; i <= this.nbJoueurs; i++) {
                 this.playerArray.push(new player(i, []));
             }
-            console.log(this.playerArray);
+            
             this.start = 1;
             this.statuDeLaPage = "pageJoueur1";
         },
         goToPageNav: function (page) {
+            this.previousActivePlayer = this.activePlayer;
             switch (page) {
                 case 1:
                     this.activePlayer = 1;
@@ -191,8 +205,11 @@ var app = new Vue({
             }
             this.statuDeLaPage = "pageJoueur" + page;
             this.activeplayerCards = this.playerArray[this.activePlayer - 1].card;
+            this.activeplayerBaron = this.playerArrayBaron[this.activePlayer - 1].card;
+            this.activeplayerGarde = this.playerArrayGarde[this.activePlayer - 1].card;
         },
         goToPageNavNEXT: function (page) {
+            this.previousActivePlayer = this.activePlayer;
             page++;
             if (page > this.nbJoueurs) {
                 page = 1;
@@ -221,20 +238,36 @@ var app = new Vue({
             }
             this.statuDeLaPage = "pageJoueur" + page;
             this.activeplayerCards = this.playerArray[this.activePlayer - 1].card;
+            this.activeplayerBaron = this.playerArrayBaron[this.activePlayer - 1].card;
+            this.activeplayerGarde = this.playerArrayGarde[this.activePlayer - 1].card; 
         },
         jouerJouCarte: function (carte) {
-            console.log(this.getName(carte));
-            //on cherche dans le tableau cardDataPlay la carte qui a le meme niveau que la carte jouer
-            for (let i = 0; i < this.cardDataPlay.length; i++) {
-                if (this.cardDataPlay[i] == carte) {
-                    this.cardDataPlay.splice(i, 1);
-                    this.activeplayerCards = this.playerArray[this.activePlayer - 1].card;
-                    break;
+            
+            if(this.baron == 1 || this.garde == 1){
+                console.log('this.baron: ', this.baron);
+                //on ajoute la carte au tableau baron ou garde
+                if(this.baron == 1){
+                    this.playerArrayBaron[this.activePlayer - 1].card.push(carte);
+                }else{
+                    this.playerArrayGarde[this.activePlayer - 1].card.push(carte);
                 }
+                this.baronSet(0);
+                this.goToPageNav(this.previousActivePlayer);
+                return;
+            }else{
+                //on cherche dans le tableau cardDataPlay la carte qui a le meme niveau que la carte jouer
+                for (let i = 0; i < this.cardDataPlay.length; i++) {
+                    if (this.cardDataPlay[i] == carte) {
+                        this.cardDataPlay.splice(i, 1);
+                        //on enleve la carte du tableau cardDataPlay
+                        this.activeplayerCards = this.playerArray[this.activePlayer - 1].card;
+                        break;
+                    }
+                }
+                //on ajoute la carte au tableau du joueur
+                this.playerArray[this.activePlayer - 1].card.push(carte);
             }
-
-            //on ajoute la carte au tableau du joueur
-            this.playerArray[this.activePlayer - 1].card.push(carte);
+            
 
         },
         getName: function (niveau) {
